@@ -1,0 +1,69 @@
+dataSourceKey: defaultDS
+destination: example
+groupId: g1
+esMapping:
+  _index: clue_dev
+  _type: _doc
+  _id: id
+  upsert: true
+  sql: "SELECT id,id clue_id, region, domain, source, clue_type, DATE_FORMAT(penalty_decision_date, '%Y-%m-%d %H:%i:%s') penalty_decision_date, DATE_FORMAT(performance_date, '%Y-%m-%d %H:%i:%s') performance_date,DATE_FORMAT(created_time, '%Y-%m-%d %H:%i:%s') created_time,case_name,DATE_FORMAT(unite_sort_time, '%Y-%m-%d %H:%i:%s') unite_sort_time,penalty_category_1, penalty_category_2, address_concerned FROM t_gzmx_clue_main_clue"
+  #  sql: "SELECT id, region, domain, clue_type,penalty_decision_date,performance_date,created_time,case_name,unite_sort_time,penalty_category_1, penalty_category_2, address_concerned FROM t_gzmx_clue_main_clue"
+  commitBatch: 3000
+
+
+
+#{
+#  "mappings":{
+#    "_doc":{
+#      "properties":{
+#        "created_time": {
+#          "type": "date"
+#        },
+#        "performance_date": {
+#          "type": "date"
+#        },
+#        "unite_sort_time": {
+#          "type": "date"
+#        },
+#        "case_name": {
+#          "search_analyzer": "ik_smart",
+#          "analyzer": "ik_max_word",
+#          "type": "text"
+#        },
+#        "penalty_category_2": {
+#          "search_analyzer": "ik_smart",
+#          "analyzer": "ik_max_word",
+#          "type": "text"
+#        },
+#        "penalty_category_1": {
+#          "search_analyzer": "ik_smart",
+#          "analyzer": "ik_max_word",
+#          "type": "text"
+#        },
+#        "domain": {
+#          "type": "integer"
+#        },
+#        "clue_type": {
+#          "type": "integer"
+#        },
+#        "location": {
+#          "type": "geo_point"
+#        },
+#        "id": {
+#          "type": "integer"
+#        },
+#        "address_concerned": {
+#          "search_analyzer": "ik_smart",
+#          "analyzer": "ik_max_word",
+#          "type": "text"
+#        },
+#        "penalty_decision_date": {
+#          "type": "date"
+#        },
+#        "region": {
+#          "type": "integer"
+#        }
+#      }
+#    }
+#  }
+#}

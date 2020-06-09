@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.logging.log4j.util.Strings;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -154,16 +156,17 @@ public class ESSyncUtil {
                 String v = ((String) val).trim();
                 if (v.length() > 18 && v.charAt(4) == '-' && v.charAt(7) == '-' && v.charAt(10) == ' '
                     && v.charAt(13) == ':' && v.charAt(16) == ':') {
-                    String dt = v.substring(0, 10) + "T" + v.substring(11);
-                    Date date = Util.parseDate(dt);
-                    if (date != null) {
-                        DateTime dateTime = new DateTime(date);
-                        if (dateTime.getMillisOfSecond() != 0) {
-                            res = dateTime.toString("yyyy-MM-dd'T'HH:mm:ss.SSS" + Util.timeZone);
-                        } else {
-                            res = dateTime.toString("yyyy-MM-dd'T'HH:mm:ss" + Util.timeZone);
-                        }
-                    }
+                    res = val;
+//                    String dt = v.substring(0, 10) + "T" + v.substring(11);
+//                    Date date = Util.parseDate(dt);
+//                    if (date != null) {
+//                        DateTime dateTime = new DateTime(date);
+//                        if (dateTime.getMillisOfSecond() != 0) {
+//                            res = dateTime.toString("yyyy-MM-dd'T'HH:mm:ss.SSS" + Util.timeZone);
+//                        } else {
+//                            res = dateTime.toString("yyyy-MM-dd'T'HH:mm:ss" + Util.timeZone);
+//                        }
+//                    }
                 } else if (v.length() == 10 && v.charAt(4) == '-' && v.charAt(7) == '-') {
                     Date date = Util.parseDate(v);
                     if (date != null) {
